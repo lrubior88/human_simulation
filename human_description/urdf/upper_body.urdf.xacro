@@ -1,0 +1,401 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="upper_body">
+	
+	<!-- meshes path -->
+	<xacro:property name="meshes_path" value="package://human_description/meshes"/>
+
+	<!-- world attachment -->
+	<link name="world"/>
+
+	<joint name="standWorld_joint" type="fixed">
+		<parent link="world"/>
+		<origin xyz="0 0 1" rpy="0 0 0"/>
+		<child link="upper_torso"/>
+	</joint>
+
+
+	<!-- LINKS -->
+	<!-- torso -->
+	<link name="upper_torso">
+		<inertial>
+			<mass value="28.71"/> 
+			<inertia ixx="0.679888688" ixy="0" ixz="0" iyy="0.679888688" iyz="0" izz="0.390814875" /> 
+			<origin/>
+		</inertial>
+		
+		<visual>
+			<origin xyz=".08 .02 .05" rpy="1.57 0 -1.57"/>
+			<geometry>
+				<mesh filename="${meshes_path}/upper_torso.dae"/>
+			</geometry>
+<!--
+			<geometry>
+				<box size="0.1 0.15 0.1" />
+			</geometry>
+-->
+			<material name="Grey">
+				<color rgba="0.7 0.7 0.7 1.0"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="${meshes_path}/upper_torso.dae"/>
+			</geometry>
+			<verbose value="Yes" />
+		</collision>
+	</link>
+
+	<gazebo reference="upper_torso">
+		<material>Gazebo/White</material>
+<!--
+		<turnGravityOff>true</turnGravityOff>
+-->
+	</gazebo>
+	
+	<!--arms-->
+	<link name="left_upper_arm">
+		<inertial>
+			<mass value="2.1"/>
+			<inertia ixx="0.018021675" ixy="0" ixz="0" iyy="0.018021675" iyz="0" izz="0.002625" />
+			<origin/>
+		</inertial>
+
+		<visual>
+			<origin xyz="-.05 -.042 -.13" rpy = "1.57 1.57 1.57"/>
+			<geometry>
+				<mesh filename="${meshes_path}/left_upper_arm.stl"/>
+			</geometry>       
+			<material name="Grey">
+				<color rgba="0.7 0.7 0.7 1.0"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="${meshes_path}/left_upper_arm.stl"/>
+			</geometry>
+			<verbose value="Yes" />
+		</collision>       
+	</link>
+	
+	<gazebo reference="left_upper_arm">
+		<material>Gazebo/White</material>
+<!--
+		<turnGravityOff>true</turnGravityOff>		
+-->
+	</gazebo>
+
+	<link name="virtual_left_upper_arm">
+	   <inertial>
+		 <origin xyz="0 0 0" rpy="0 0 0"/>
+		 <mass value="1"/>
+		 <inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
+	   </inertial>
+	   
+	   <visual>
+		 <origin xyz="0 0 0" rpy="0 0 0" />
+		 <geometry>
+		   <box size=".0001 .0001 .0001" />
+		 </geometry>
+		 <material name="Cyan">
+		   <color rgba="0 255 255 1.0"/>
+		 </material>
+	   </visual>
+	   
+	   <collision>
+		 <origin xyz="0 0 0" rpy="0 0 0"/>
+		 <geometry>
+		   <box size=".0001 .0001 .0001" />
+		 </geometry>
+	   </collision>
+	</link>
+	
+	<gazebo reference="virtual_left_upper_arm">
+		<material>Gazebo/Black</material>
+<!--
+		<turnGravityOff>true</turnGravityOff>
+-->
+	</gazebo>
+
+
+	<link name="right_upper_arm">
+	  <inertial>
+		<mass value="2.1"/>
+		<inertia ixx="0.018021675" ixy="0" ixz="0" iyy="0.018021675" iyz="0" izz="0.002625" />
+		<origin/>
+	  </inertial>
+
+	  <visual>
+		<origin xyz="-.8 .03 -.155" rpy = "1.57 -1.57 1.57"/>
+		<geometry>
+		   <mesh filename="${meshes_path}/right_upper_arm.stl"/>
+		</geometry>               
+	  <material name="Grey">
+		<color rgba="0.7 0.7 0.7 1.0"/>
+	  </material>
+	  </visual>
+	  
+	  <collision>
+		<origin xyz="0 0 0" rpy="0 0 0" />
+		<geometry>
+		   <mesh filename="${meshes_path}/right_upper_arm.stl"/>
+		</geometry>
+		<verbose value="Yes" />
+	  </collision>    
+	</link>
+	
+	<gazebo reference="right_upper_arm">
+		<material>Gazebo/White</material>
+<!--
+		<turnGravityOff>true</turnGravityOff>		
+-->
+	</gazebo>
+
+	<link name="virtual_right_upper_arm">
+	   <inertial>
+		 <origin xyz="0 0 0" rpy="0 0 0"/>
+		 <mass value="1"/>
+		 <inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
+	   </inertial>
+	   
+	   <visual>
+		 <origin xyz="0 0 0" rpy="0 0 0" />
+		 <geometry>
+		   <box size=".0001 .0001 .0001" />
+		 </geometry>
+		 <material name="Cyan">
+		   <color rgba="0 255 255 1.0"/>
+		 </material>
+	   </visual>
+	   
+	   <collision>
+		 <origin xyz="0 0 0" rpy="0 0 0"/>
+		 <geometry>
+		   <box size=".0001 .0001 .0001" />
+		 </geometry>
+	   </collision>
+	</link>
+	
+	<gazebo reference="virtual_right_upper_arm">
+		<material>Gazebo/Black</material>
+<!--
+		<turnGravityOff>true</turnGravityOff>
+-->
+	</gazebo>
+
+	<link name="left_lower_arm">
+	  <inertial>
+		<mass value="1.2"/>
+		<inertia ixx="0.0066817" ixy="0" ixz="0" iyy="0.0066817" iyz="0" izz="0.0011616" />
+		<origin/>
+	  </inertial>
+	  
+	  <visual>
+		<origin xyz="-.09 -.01 -.09" rpy = "0 1.57 0"/>
+		<geometry>
+		   <mesh filename="${meshes_path}/left_lower_arm.stl"/>
+		</geometry>                         
+		<material name="Grey">
+			<color rgba="0.7 0.7 0.7 1.0"/>
+		</material>
+	  </visual>
+	  
+	  <collision>
+		<origin xyz="0 0 0" rpy="0 0 0" />
+		<geometry>
+		   <mesh filename="${meshes_path}/left_lower_arm.stl"/>
+		</geometry>
+		<verbose value="Yes" />
+	  </collision>    
+	</link>
+	
+	<gazebo reference="right_lower_arm">
+		<material>Gazebo/White</material>
+<!--
+		<turnGravityOff>true</turnGravityOff>		
+-->
+	</gazebo>
+
+	<link name="right_lower_arm">
+	  <inertial>
+		<mass value="1.2"/>
+		<inertia ixx="0.0066817" ixy="0" ixz="0" iyy="0.0066817" iyz="0" izz="0.0011616" />
+		<origin/>
+	  </inertial>
+
+	  <visual>
+		<origin xyz=".07 -.07 -.29" rpy = "0 -1.57 0"/>
+		<geometry>
+		   <mesh filename="${meshes_path}/right_lower_arm.stl"/>
+		</geometry>            
+		<material name="Grey">
+			<color rgba="0.7 0.7 0.7 1.0"/>
+		</material>
+	  </visual>
+	  
+	  <collision>
+		<origin xyz="0 0 0" rpy="0 0 0" />
+		<geometry>
+		   <mesh filename="${meshes_path}/right_lower_arm.stl"/>
+		</geometry>
+		<verbose value="Yes" />
+	  </collision>      
+	</link>
+	
+	<gazebo reference="left_lower_arm">
+		<material>Gazebo/White</material>
+<!--
+		<turnGravityOff>true</turnGravityOff>	
+-->
+	</gazebo>
+
+	<link name="left_hand">
+	  <inertial>
+		<mass value=".5"/>
+		<inertia ixx="0.0004418" ixy="0" ixz="0" iyy="0.0004418" iyz="0" izz="0.0004418" />
+		<origin/>
+	  </inertial>
+
+	  <visual>
+		<origin xyz="-.07 .04 -.049" rpy = "0 1.57 0"/>
+		<geometry>
+		   <mesh filename="${meshes_path}/left_hand.stl"/>
+		</geometry>    
+		<material name="Grey">
+			<color rgba="0.7 0.7 0.7 1.0"/>
+		</material>
+	  </visual>
+	  
+	  <collision>
+		<origin xyz="0 0 0" rpy="0 0 0" />
+		<geometry>
+		   <mesh filename="${meshes_path}/left_hand.stl"/>
+		</geometry>
+		<verbose value="Yes" />
+	  </collision>        
+	</link>
+	
+	<gazebo reference="left_hand">
+		<material>Gazebo/White</material>
+<!--
+		<turnGravityOff>true</turnGravityOff>	
+-->
+	</gazebo>
+
+	<link name="right_hand">
+	  <inertial>
+		<mass value=".5"/>
+		<inertia ixx="0.0004418" ixy="0" ixz="0" iyy="0.0004418" iyz="0" izz="0.0004418" />
+		<origin/>
+	  </inertial>
+
+	  <visual>
+		<origin xyz="-.82 .22 -.058" rpy = "0 -1.57 2.8"/>
+		<geometry>
+		   <mesh filename="${meshes_path}/right_hand.stl"/>
+		</geometry>     
+		<material name="Grey">
+			<color rgba="0.7 0.7 0.7 1.0"/>
+		</material>
+	  </visual>
+	  
+	  <collision>
+		<origin xyz="0 0 0" rpy="0 0 0" />
+		<geometry>
+		   <mesh filename="${meshes_path}/right_hand.stl"/>
+		</geometry>
+		<verbose value="Yes" />
+	  </collision>          
+	</link>
+	
+	<gazebo reference="right_hand">
+		<material>Gazebo/White</material>
+<!--
+		<turnGravityOff>true</turnGravityOff>		
+-->
+	</gazebo>
+
+
+	<!-- JOINTS -->
+	 
+	<!--arms circumduction-->
+	 <joint name="left_shoulder_circ_joint" type="continuous">
+		<origin xyz="0 .25 .225" rpy=".4 0 0"/>
+		<axis xyz= "0 1 0"/>
+		<!--limit lower= "-0.261799388" upper= "0.261799388" effort = "2.645" velocity="6"/-->
+		<parent link="upper_torso"/>
+		<child link="virtual_left_upper_arm"/>
+	 </joint>
+
+	 <joint name="right_shoulder_circ_joint" type="continuous">
+		<origin xyz="0 -.25 .225" rpy="-.4 0 0"/>
+		<axis xyz= "0 1 0"/>
+		<!--limit lower= "-0.261799388" upper= "0.261799388" effort = "2.645" velocity="6"/-->
+		<parent link="upper_torso"/>
+		<child link="virtual_right_upper_arm"/>
+	 </joint>
+
+	<!--arms abduction (vit. man position)-->
+	 <joint name="left_shoulder_abduction_joint" type="revolute">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<axis xyz= "1 0 0"/>
+		<limit lower= "-1.57" upper= "1.57" effort = "2.645" velocity="6"/>
+		<parent link="virtual_left_upper_arm"/>
+		<child link="left_upper_arm"/>
+	 </joint>
+
+	 <joint name="right_shoulder_abduction_joint" type="revolute">
+		<origin xyz="0 0 0" rpy=" 0 0 0"/>
+		<axis xyz= "1 0 0"/>
+		<limit lower= "-1.57" upper= "1.57" effort = "2.645" velocity="6"/>
+		<parent link="virtual_right_upper_arm"/>
+		<child link="right_upper_arm"/>
+	 </joint>
+	 
+	 <!--elbow extension and flexion-->
+	 <joint name="left_elbow_flex_joint" type="revolute">
+		<origin xyz="0 -.1 -.28" rpy="0 0 0"/>
+		<axis xyz= "0 1 0"/>
+		<limit lower= "-1.57079633" upper= "1.57" effort = "2.645" velocity="6"/>
+		<parent link="left_upper_arm"/>
+		<child link="left_lower_arm"/>
+	 </joint>
+
+	<joint name="right_elbow_flex_joint" type="revolute">
+		<origin xyz="0 .07 -.29" rpy="0 0 0"/>
+		<axis xyz= "0 1 0"/>
+		<limit lower= "-1.57079633" upper= "1.57" effort = "2.645" velocity="6"/>
+		<parent link="right_upper_arm"/>
+		<child link="right_lower_arm"/>
+	 </joint>
+
+	 <!--wrists flexion-->
+	 <joint name="left_wrist_flex_joint" type="fixed">
+		<origin xyz="0 0 -.247" rpy="0 0 0"/>
+	<!--
+		<axis xyz= "0 1 0"/>
+		<limit lower= "-1.57079633" upper= "1.57" effort = "2.645" velocity="6"/>
+	-->
+		<parent link="left_lower_arm"/>
+		<child link="left_hand"/>
+	 </joint>
+
+	<joint name="right_wrist_flex_joint" type="fixed">
+		<origin xyz="0 0 -.247" rpy="0 0 0"/>
+	<!--
+		<axis xyz= "0 1 0"/>
+		<limit lower= "-1.57079633" upper= "1.57" effort = "2.645" velocity="6"/>
+	-->
+		<parent link="right_lower_arm"/>
+		<child link="right_hand"/>
+	 </joint>
+
+ 
+ 
+</robot>
+ 
+
+
